@@ -1,0 +1,19 @@
+{
+    "test":{
+        "e1":{
+            "height": 1,
+            "width": 2,
+            "imgUrl": "./app/EquipmentComponents/img/unnamed.jpg"
+        },
+        "e2":{
+            "height": 2,
+            "width": 2,
+            "imgUrl": "./app/EquipmentComponents/img/unnamed.jpg"
+        },
+        "e3":{
+            "height": 3,
+            "width": 2,
+            "imgUrl": "./app/EquipmentComponents/img/unnamed.jpg"
+        }
+    }
+}
