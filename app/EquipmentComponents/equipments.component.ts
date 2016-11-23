@@ -1,33 +1,36 @@
-import {Component} from '@angular/core'
-import {EquipmentComponent} from './equipment.component'
+import { Component, Input } from '@angular/core';
+import { EquipmentComponent } from './equipment.component';
+import { EquipmentService } from './equipment.services';
 
 @Component({
     selector: 'all-equipment',
     template: `
-        <div *ngFor="let e of test">
-            <single-equipment [equipment]="e">
+        <div *ngFor="let e of equipmentJson">
+            <single-equipment [width]="width" [equipment]="e">
             </single-equipment>
         </div>
-    `
+    `,
+    providers: [EquipmentService]
 })
 export class EquipmentsComponent{
-    test = [
-        {
-            "height": 1,
-            "width": 2,
-            "imgUrl": "./app/EquipmentComponents/img/unnamed.jpg"
-        },
-        {
-            "height": 2,
-            "width": 2,
-            "imgUrl": "./app/EquipmentComponents/img/unnamed.jpg"
-        },
-        {
-            "height": 3,
-            "width": 2,
-            "imgUrl": "./app/EquipmentComponents/img/unnamed.jpg"
-        }
-    ]
-    
+    @Input() width: number;
+    equipmentJson = new Array();
 
+    constructor(private equipmentService: EquipmentService){
+        this.generateDefaultEquipment();
+    }
+    generateDefaultEquipment(){
+        this.equipmentService.getDefaultEquipment().subscribe(
+            defaultEquipment => {
+                this.formatData(defaultEquipment);                
+            });
+    }
+    formatData(defaultEquipment: any){
+        for(let size in defaultEquipment){
+            for(let e in defaultEquipment[size]){
+                this.equipmentJson.push(defaultEquipment[size][e]);
+            }
+        }
+    }
 }
+

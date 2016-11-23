@@ -1,44 +1,29 @@
-import {Component, Input, OnInit} from '@angular/core'
-import {DomSanitizer} from '@angular/platform-browser';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
     selector: 'single-equipment',
     template: `
         <img class="equipment"
+            [alt]="name"
             [src]="equipmentImg"
             [style.width.px]="width" 
             [style.height.px]="height"/>
-            
-        
      `,
-     styles: [`
-        .equipment {
-        }
-     `]
+     styles: [ `
+        .equipment{
+            padding-left: 31px;
+        }`]
 })
-//  [style.background-image]="backgroundImageStyle"
 export class EquipmentComponent{
-    //set imgUrl to imgUrl
-    //set heigh width
-    //imgUrl = './app/EquipmentComponents/img/unnamed.jpg'
     @Input() equipment: any;
-    width = 0;
-    height = 0;
-
-    //set to any, because value cannot be string
+    height: number;
+    @Input() width: number;
+    name: string;
     equipmentImg : any;
-    
-    //DomSanitizer allows us to set background image dynamically
-    constructor(private sanitizer: DomSanitizer) {
-    }
 
     ngOnInit() {
-        
-        console.log(this.equipment.imgUrl);
-        this.width = this.equipment.width * 50;
-        this.height = this.equipment.height * 50;
+        this.name = this.equipment.name;
         this.equipmentImg = this.equipment.imgUrl;
-
-       
+        this.height = this.equipment.height * 15;
     }
 }
